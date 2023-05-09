@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap');
-
-* {
-    font-family: 'Noto Sans KR' sans-serif
-};
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&family=Song+Myung&display=swap');
 
 body, h1, h2 {
     margin: 8px;
@@ -11,6 +8,11 @@ body, h1, h2 {
 
 body {
     min-width: fit-content;
+    font-family: 'Noto Sans KR' sans-serif
+}
+
+h2 {
+    font-family: 'Song Myung';
 }
 
 h1 {
@@ -34,7 +36,8 @@ h2 {
     margin: 30px;
     margin-right: auto;
     margin-left: auto;
-    border: 1px solid #ebebeb;
+    border: 5px solid #ebebeb;
+    background-color: whitesmoke;
     box-shadow: 0 1px 20px 0 rgba(0,0,0,0,1);
 }
 
