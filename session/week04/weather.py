@@ -15,3 +15,5 @@ data = json.loads(result.text)
 
 print(data["name"], "의 날씨입니다.")
 print("날씨는", data["weather"][0]["main"], "입니다.")
+print("현재 온도는", data["main"]["temp"], "입니다.")
+print("하지만 체감 온도는", data["main"]["feels_like"], "입니다.")
