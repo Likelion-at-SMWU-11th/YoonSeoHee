@@ -7,6 +7,3 @@ def helloBabyLion(request): #request받아서
     # return HttpResponse('장고의 세계로 들어왔습니다.')
     #이렇게 응답해줄거다
     return render(request, 'crazyDjango.html')
-
-def studyLion(request):
-    return render(request, 'funDjango.html')
