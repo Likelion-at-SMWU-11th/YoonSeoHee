@@ -9,3 +9,6 @@ class Post (models.Model):
     created_at = models.DateTimeField('작성일')
     view_count = models.IntegerField('조회수')
     
+class Comment (models.Model):
+    
+    content = models.TextField('내용')
