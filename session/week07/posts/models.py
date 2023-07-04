@@ -3,9 +3,13 @@ from django.db import models
 # Create your models here.
 
 class Post (models.Model):
-    
     image = models.ImageField(verbose_name='이미지')
     contentn = models.TextField('내용')
     created_at = models.DateTimeField('작성일')
     view_count = models.IntegerField('조회수')
     
+class Comment (models.Model):
+    name = models.CharField(max_length=20, verbose_name='이름')
+    content = models.TextField('내용')
+    created_at = models.DateTimeField('작성일')
+    like_count = models.IntegerField('좋아요수')
