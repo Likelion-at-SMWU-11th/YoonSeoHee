@@ -20,6 +20,6 @@ from posts.views import function_view, class_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('fbv/', function_view),
+    path('fbv/', function_view, name='aboutme'),
     path('cbv/', class_view.as_view()),
 ]
