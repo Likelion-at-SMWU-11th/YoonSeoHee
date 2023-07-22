@@ -3,8 +3,11 @@
     <div class="card__header">
         <img src="http://via.placeholder.com/32x33" alt="프로필이미지">
         <a href="#">
-            <span class="card__user-name">likelion.official</span>
+            <span class="card__user-name">{{ post.writer }}</span>
         </a>
+        {% if request.user == post.writer %}
+            <a href="{% url 'posts:post-update' post.id %}">수정하기</a>
+        {% endif %}
     </div>
     <div class="card__body">
         <div>
