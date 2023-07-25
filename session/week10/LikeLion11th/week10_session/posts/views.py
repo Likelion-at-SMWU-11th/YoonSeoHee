@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponse, JsonResponse
 from django.views.generic import ListView
+
+from .forms import PostBasedForm, PostCreateForm, PostUpdateForm, PostDetailForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
 
@@ -27,6 +29,7 @@ def post_detail_view(request, id):
     post = Post.objects.get(id=id)
     context = {
         'post' : post,
+        'form' : PostDetailForm(),
     }
     return render(request, 'posts/post_detail.html', context)
 
@@ -42,6 +45,24 @@ def post_create_view(request):
             content = content,
             writer = request.user
         )
+        return redirect('index')
+
+def post_create_form_view(request):
+    if request.method=="GET":
+        form = PostCreateForm()
+        context = {'form' : form}
+        return render(request, 'posts/post_form2.html', context)
+    else:
+        form = PostCreateForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            Post.objects.create( #image, content 데이터를 담은 Post 객체 만들어서 저장
+            image=form.cleaned_data['image'], # 유효성 검사
+            content=form.cleaned_data['content'],
+            writer=request.user
+            )
+        else: # 잘못들어오면 화면이 움직이지 않음
+            return redirect('post:post-create')
         return redirect('index')
 
 @login_required
