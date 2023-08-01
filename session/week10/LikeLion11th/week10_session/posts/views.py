@@ -4,8 +4,45 @@ from django.views.generic import ListView
 
 from .forms import PostBasedForm, PostCreateForm, PostUpdateForm, PostDetailForm
 from .models import Post
+from .serializers import PostModelSerializer
+
 from django.contrib.auth.decorators import login_required
 
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+# 12주차 세션
+class PostModelViewSet(ModelViewSet):
+    queryset=Post.objects.all()
+    serializer_class=PostModelSerializer
+
+@api_view()
+def calculator(request):
+    num1=request.GET.get('num1', 0)
+    num2=request.GET.get('num2', 0)
+    operators=request.GET.get('operators')
+
+    if operators=='^': # +는 url 규정상 안됨
+        result=int(num1)+int(num2)
+    elif operators=='-':
+        result=int(num1)-int(num2)
+    elif operators=='*':
+        result=int(num1)*int(num2)
+    elif operators=='/':
+        result=int(num1)/int(num2)
+    else:
+        result=0
+
+    data={
+        'type':'FBW',
+        'result':result
+    }
+
+    return Response(data)
+
+
+# 11주차 세션
 def index(request):
     post_list = Post.objects.all().order_by('-created_at') # Post 모델에 있는 객체 전부 불러오기
     context = {

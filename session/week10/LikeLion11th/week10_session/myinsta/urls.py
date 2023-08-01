@@ -6,8 +6,16 @@ from django.urls import path, include
 from posts.views import url_view, url_parameter_view, function_view, index
 from posts.views import class_view
 
+from rest_framework import routers
+from posts.views import *
+
+router=routers.DefaultRouter()
+router.register('posts', PostModelViewSet)
+
 urlpatterns = [
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('calculator/', calculator, name='calculator'),
     # Function Based View
     path('url/', url_view),
     path('url/<str:username>/', url_parameter_view),
