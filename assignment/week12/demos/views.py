@@ -1,7 +1,8 @@
 from rest_framework import viewsets
-from .serializer import BlogSerializer
-from .models import Blog
+from rest_framework.decorators import api_view
+from .serializer import PostSerializer
+from .models import Post
 
-class BlogViewSet(viewsets.ModelViewSet):
-    queryset = Blog.objects.all()
-    serializer_class = BlogSerializer
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
