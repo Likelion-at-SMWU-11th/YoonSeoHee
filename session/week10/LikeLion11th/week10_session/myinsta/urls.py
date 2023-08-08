@@ -23,9 +23,14 @@ urlpatterns = [
     # Class Based View
     path('cbv/', class_view.as_view()), # as_view: 진입 메소드
 
-    path('', index, name='index'),
+    #path('', index, name='index'),
     path('accounts/', include('accounts.urls', namespace='accounts')),
-    path('posts/', include('posts.urls', namespace='posts')),
+    # path('posts/', include('posts.urls', namespace='posts')),
+    
+    # # 게시물 목록 + 생성
+    # path('posts/', PostListCreateView.as_view(), name='post-list-create'),
+    # # 게시물 상세 + 수정 + 삭제
+    # path('posts/<int:pk>/', PostRetrieveUpdateView.as_view(), name='post-detail'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
