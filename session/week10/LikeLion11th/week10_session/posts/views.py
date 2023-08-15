@@ -12,6 +12,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, action
 from rest_framework import generics, status
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 
 # 게시글 목록 + 생성
 class PostListCreateView(generics.ListAPIView, generics.CreateAPIView):
@@ -40,11 +41,7 @@ class PostRetrieveUpdateView(generics.RetrieveAPIView, generics.UpdateAPIView, g
     queryset = Post.objects.all()
     serializer_class = PostListSerializer
 
-# # 게시글 수정
-# class PostUpdateView(generics.UpdateAPIView):
-#     queryset = Post.objects.all()
-#     serializer_class = PostListSerializer
-
+# ViewSet
 class PostListViewSet(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostListSerializer
@@ -54,6 +51,22 @@ class PostModelViewSet(ModelViewSet):
     queryset=Post.objects.all()
     # serializer_class = PostModelSerializer
     serializer_class = PostListSerializer
+
+    def get_permissions(self):
+        action = self.action
+        if action =='list': # 게시판 = 누구나 볼 수 있도록 권한
+            permission_classes = [AllowAny]
+        elif action == 'create': # 작성, 상세 = 로그인한 사람만
+            permission_classes = [IsAuthenticated]
+        elif action == 'retrieve' :
+            permission_classes = [IsAuthenticated]
+        elif action == 'update':
+            permission_classes = [IsAdminUser]
+        elif action == 'partial_update':
+            permission_classes = [IsAdminUser]
+        elif action == 'destroy':
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
 
     @action(detail=True, methods=['get'])
     def get_comment_all(self, request, pk = None):
