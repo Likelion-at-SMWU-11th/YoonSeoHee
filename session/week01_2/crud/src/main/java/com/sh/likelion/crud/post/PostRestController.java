@@ -1,6 +1,8 @@
 package com.sh.likelion.crud.post;
 
+import com.sh.likelion.crud.exception.PostNotExistException;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class PostRestController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     public void createPost(@RequestBody PostDto postDto){
         logger.info(postDto.toString());
         this.postList.add(postDto);
@@ -25,7 +28,7 @@ public class PostRestController {
 
     @GetMapping()
     public List<PostDto> readPostAll(){
-        logger.info("iin read post all");
+        logger.info("in read post all");
         return this.postList;
     }
 
@@ -56,5 +59,11 @@ public class PostRestController {
     @DeleteMapping("{id}")
     public void deletePost(@PathVariable("id") int id){
         this.postList.remove(id);
+    }
+
+    @GetMapping("/test-exception")
+    public void throwException() {
+        System.out.println("test-exception");
+        throw new PostNotExistException();
     }
 }

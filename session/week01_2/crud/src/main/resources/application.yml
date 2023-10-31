@@ -4,6 +4,12 @@ spring:
 
 ---
 
+logging:
+  level:
+    dev.aquashow.jpa.handler : debug
+
+---
+
 spring:
   config:
     activate:
