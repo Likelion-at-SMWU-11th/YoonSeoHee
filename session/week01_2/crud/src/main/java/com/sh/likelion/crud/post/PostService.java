@@ -28,8 +28,8 @@ public class PostService {
                 Math.toIntExact(postEntity.getId()),
                 postEntity.getTitle(),
                 postEntity.getContent(),
-                postEntity.getWriter(),
-                postEntity.getBoardEntity() == null ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
+                postEntity.getWriter()
+//                postEntity.getBoardEntity() == null ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
         );
     }
 
@@ -43,8 +43,8 @@ public class PostService {
                     Math.toIntExact(postEntity.getId()),
                     postEntity.getTitle(),
                     postEntity.getContent(),
-                    postEntity.getWriter(),
-                    postEntity.getBoardEntity() == null ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
+                    postEntity.getWriter()
+//                    postEntity.getBoardEntity() == null ? 0 : Math.toIntExact(postEntity.getBoardEntity().getId())
                     ));
         }
         return postDtoList;
