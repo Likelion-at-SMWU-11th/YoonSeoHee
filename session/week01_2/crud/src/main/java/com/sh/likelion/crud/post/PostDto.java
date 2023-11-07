@@ -16,13 +16,19 @@ public class PostDto {
     private String content;
     @Size(min = 3, max = 10)
     private String writer;
-    private int boardId;
+//    private int boardId;
 
-    public PostDto(int id, String title, String content, String writer, int boardId){
+    public PostDto(int id, String title, String content, String writer){
         this.id = id;
         this.title = title;
         this.content = content;
         this.writer = writer;
-        this.boardId = boardId;
+//        this.boardId = boardId;
+    }
+
+    public PostDto(){
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
     }
 }
