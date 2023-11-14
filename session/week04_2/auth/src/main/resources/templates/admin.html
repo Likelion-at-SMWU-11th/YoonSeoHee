@@ -10,5 +10,8 @@
 </head>
 <body>
 Hello Admin!
+    <form th:action="@{/user/logout}" method="post">
+        <input type="submit" th:value="로그아웃"/>
+    </form>
 </body>
 </html>
